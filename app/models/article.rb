@@ -6,4 +6,7 @@ class Article < ApplicationRecord
   belongs_to :user
   belongs_to :admin
   
+  has_rich_text :content
+  
+  validates :title, presence: true
 end

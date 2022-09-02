@@ -25,5 +25,8 @@ Rails.application.routes.draw do
     resources :categories, only: [:new, :index, :edit]
     resources :users, only: [:index, :show, :edit]
   end
+  
+  #ゲストユーザー用
+  post '/guests/guest_sign_in', to: 'public/guests#new_guest'
 
 end
