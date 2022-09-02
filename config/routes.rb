@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: "homes#top"
+    
+    resources :users, only: [:show, :edit]
+    resources :articles, only: [:new, :index, :show, :edit]
+    resources :categories, only: [:index]
   end
   
   #管理者用
@@ -17,6 +21,9 @@ Rails.application.routes.draw do
   
   namespace :admin do
     root to: "homes#top"
+    resources :articles, only: [:new, :index, :show, :edit]
+    resources :categories, only: [:new, :index, :edit]
+    resources :users, only: [:index, :show, :edit]
   end
 
 end
