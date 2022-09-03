@@ -1,0 +1,13 @@
+<div class="text-center">
+  <label class="h3 mb-5 mt-5">本当に退会しますか？</label>
+  <p>
+    退会すると、これまでの投稿に関するデータは削除されます。<br>
+    退会する場合は、「退会する」をクリックしてください。
+  </p>
+  <div class="mt-5">
+    <%= link_to "退会しない", users_my_page_path, class:"btn btn-primary mr-3" %>
+    <%= link_to "退会する", users_withdraw_path, method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %>  
+  </div>
+</div>
+  
+

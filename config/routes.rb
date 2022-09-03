@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: "homes#top"
+    get 'users/my_page' => "users#show"
+    get 'users/edit' => "users#edit"
+    patch 'users' => "users#update"
+    get 'users/unsubscribe'     => "users#unsubscribe"
+    patch 'users/withdraw'      => "users#withdraw"
     
     resources :users, only: [:show, :edit]
     resources :articles, only: [:new, :index, :show, :edit]

@@ -1,2 +1,34 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container"><%= "#{@user.name}のマイページ" %></label>
+  <div class="row mb-2">
+    <div class="col-lg-8">
+      <table class="mb-3">
+        <tbody>
+          <tr>
+            <th>ユーザー情報</th>
+            <td><%= link_to "編集する", users_edit_path, class:"btn btn-success ml-5" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered mb-5">
+        <tbody>
+            <td class="table-active">ユーザー名</td>
+            <td><%= @user.name %></td>
+          </tr>
+  
+  <label class="h4 bg-lig        <tr>
+            <td class="table-active">メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <tbody>
+          <tr>
+            <th>投稿履歴</th>
+            <td>なにかくる</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
