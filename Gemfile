@@ -62,6 +62,7 @@ gem 'rmagick'
 gem 'net-smtp'
 gem 'kaminari','~> 1.2.1'
 gem 'devise'
+gem 'actiontext'
 
 # デバッグ用
 gem 'pry-byebug', group: :development

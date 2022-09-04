@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     patch 'users/withdraw'      => "users#withdraw"
     
     resources :users, only: [:show, :edit]
-    resources :articles, only: [:new, :index, :show, :edit]
+    resources :articles, only: [:new, :create, :index, :show, :edit]
     resources :categories, only: [:index]
   end
   
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: "homes#top"
     resources :articles, only: [:new, :index, :show, :edit]
-    resources :categories, only: [:new, :index, :edit]
+    resources :categories, only: [:new, :create, :index, :edit]
     resources :users, only: [:index, :show, :edit]
   end
   

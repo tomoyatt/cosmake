@@ -1,2 +1,18 @@
-<h1>Public::Articles#new</h1>
-<p>Find me in app/views/public/articles/new.html.erb</p>
+<div class="container">
+  <label class="h4 bg-light mb-5">新規投稿</label>
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="form mx-5">
+        <div class="field">
+          <%= form_with model: @article, url: articles_path, method: :post do |f| %>
+            <%= f.label :タイトル, class:"mr-3" %>
+            <%= f.text_field :title %><br>
+            <%= f.label :投稿内容 %><br>
+            <%= f.rich_text_area :body %><br>
+            <%= f.submit "新規投稿", class:"btn btn-success ml-3" %>
+          <% end %>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
