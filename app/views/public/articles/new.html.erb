@@ -6,9 +6,16 @@
         <div class="field">
           <%= form_with model: @article, url: articles_path, method: :post do |f| %>
             <%= f.label :タイトル, class:"mr-3" %>
-            <%= f.text_field :title %><br>
+            <%= f.text_field :title, size: "50x5" %><br>
+            <%= f.label :カテゴリ, class:"mr-3" %>
+            <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "--選択してください--" %><br>
+            <%= f.label :サムネイル %>
+            <%= f.file_field :image %><br>
             <%= f.label :投稿内容 %><br>
-            <%= f.rich_text_area :body %><br>
+            <%= f.rich_text_area :content %><br>
+            <%= f.label :公開ステータス %>
+            <%= f.radio_button :is_active, true %> 公開
+            <%= f.radio_button :is_active, false %> 非公開
             <%= f.submit "新規投稿", class:"btn btn-success ml-3" %>
           <% end %>          
         </div>

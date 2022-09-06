@@ -1,2 +1,8 @@
-<%= @article.title
-<%= @article.body %>
+<%= image_tag @article.get_image %>
+<br>
+<%= @article.title %>
+<%= @article.content %>
+
+<% if @article.user == current_user %>
+  <%= link_to "編集する", edit_article_path, class:"btn btn-success ml-5" %>
+<% end %>

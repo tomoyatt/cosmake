@@ -1,0 +1,13 @@
+
+[1mFrom:[0m /home/ec2-user/environment/cosmake/app/controllers/public/articles_controller.rb:10 Public::ArticlesController#create:
+
+     [1;34m6[0m: [32mdef[0m [1;34mcreate[0m
+     [1;34m7[0m:   
+     [1;34m8[0m:   binding.pry
+     [1;34m9[0m:   
+ => [1;34m10[0m:   @article = [1;34;4mArticle[0m.new(article_params)
+    [1;34m11[0m:   @article.user_id = current_user.id
+    [1;34m12[0m:   @article.save
+    [1;34m13[0m:   redirect_to article_path(@article.id)
+    [1;34m14[0m: [32mend[0m
+
