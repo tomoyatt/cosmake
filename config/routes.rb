@@ -15,7 +15,10 @@ Rails.application.routes.draw do
     patch 'users/withdraw'      => "users#withdraw"
     
     resources :users, only: [:show, :edit]
-    resources :articles, only: [:new, :create, :index, :show, :edit, :update]
+    resources :articles, only: [:new, :create, :index, :show, :edit, :update] do
+      resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
+    end
     resources :categories, only: [:index]
   end
   
