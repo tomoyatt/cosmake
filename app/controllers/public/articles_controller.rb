@@ -11,7 +11,7 @@ class Public::ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.all
+    @articles = Article.published
   end
 
   def show
@@ -22,7 +22,7 @@ class Public::ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
   end
-  
+
   def update
     @article = Article.find(params[:id])
     @article.user_id = current_user.id
@@ -34,7 +34,7 @@ class Public::ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :image, :content, :user_id, :category_id)
+    params.require(:article).permit(:title, :image, :content, :user_id, :category_id, :is_active)
   end
 
 end

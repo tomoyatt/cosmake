@@ -27,4 +27,8 @@ class Article < ApplicationRecord
     favorites.exists?(user_id: user.id)
   end
   
+  # 投稿の公開・非公開
+  scope :published, -> {where(is_active: true)}
+  scope :unpublished, -> {where(is_active: false)}
+  
 end
