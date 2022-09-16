@@ -4,7 +4,9 @@ class Article < ApplicationRecord
   has_many :favorites,          dependent: :destroy
   has_many :category_articles,  dependent: :destroy
   belongs_to :user
-  belongs_to :admin, optional: true
+  
+  # 管理者用アソシエーション
+  # belongs_to :admin, optional: true
 
   has_one_attached :image
   has_rich_text :content

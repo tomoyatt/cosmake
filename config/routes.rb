@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     patch 'users' => "users#update"
     get 'users/unsubscribe'     => "users#unsubscribe"
     patch 'users/withdraw'      => "users#withdraw"
+    get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     
     resources :users, only: [:show, :edit]
     resources :articles, only: [:new, :create, :index, :show, :edit, :update] do
