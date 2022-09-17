@@ -6,8 +6,13 @@ class Public::ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.user_id = current_user.id
-    @article.save
-    redirect_to article_path(@article.id)
+    if @article.save
+      redirect_to article_path(@article.id)
+    else
+      @article = Article.new(article_params)
+      flash[:notice] = "項目は必ず入力してください"
+      render :new
+    end
   end
 
   def index
@@ -28,6 +33,12 @@ class Public::ArticlesController < ApplicationController
     @article.user_id = current_user.id
     @article.update(article_params)
     redirect_to article_path(@article.id)
+  end
+  
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    redirect_to users_my_page_path
   end
 
 

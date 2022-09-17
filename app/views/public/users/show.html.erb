@@ -1,4 +1,4 @@
-<div class="container">label><%= "#{@user.name}のマイページ" %></label>
+<div class="container"><label><%= "#{@user.name}のマイページ" %></label>
   <div class="row mb-2">
     <div class="col-lg-8">
       <table class="mb-3">
@@ -20,6 +20,7 @@
           </tr>
         </tbody>
       </table>
+      <label><%= link_to "いいね一覧", favorites_user_path(@user), class: 'text-dark' %></label>
       <h3>投稿一覧</h3>
       <div class="row">
         <% @articles.each do |article| %>

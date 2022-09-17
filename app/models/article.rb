@@ -13,7 +13,7 @@ class Article < ApplicationRecord
 
   validates :title, presence: true
   validates :content, presence: true
-  validates :image, presence: true
+
   
   def get_image
     unless image.attached?

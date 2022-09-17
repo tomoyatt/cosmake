@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     
     resources :users, only: [:show, :edit]
-    resources :articles, only: [:new, :create, :index, :show, :edit, :update] do
+    resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
     end
