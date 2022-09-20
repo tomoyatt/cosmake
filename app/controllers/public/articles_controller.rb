@@ -1,4 +1,7 @@
 class Public::ArticlesController < ApplicationController
+
+  before_action :search
+
   def new
     @article = Article.new
   end
@@ -16,7 +19,9 @@ class Public::ArticlesController < ApplicationController
   end
 
   def index
-    @articles = Article.published
+  #  @articles = Article.published
+    @q = Article.ransack(params[:q])
+    @articles = @search.result(distinct: true)
   end
 
   def show
@@ -34,13 +39,13 @@ class Public::ArticlesController < ApplicationController
     @article.update(article_params)
     redirect_to article_path(@article.id)
   end
-  
+
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
     redirect_to users_my_page_path
   end
-  
+
 
   private
 
