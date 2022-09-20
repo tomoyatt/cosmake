@@ -59,6 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # action_text画像用
 gem 'rmagick'
 
+
 gem 'net-smtp'
 gem 'kaminari','~> 1.2.1'
 gem 'devise'
@@ -66,3 +67,5 @@ gem 'actiontext'
 
 # デバッグ用
 gem 'pry-byebug', group: :development
+
+gem 'ransack'

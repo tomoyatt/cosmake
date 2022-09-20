@@ -40,7 +40,7 @@ class Public::ArticlesController < ApplicationController
     @article.destroy
     redirect_to users_my_page_path
   end
-
+  
 
   private
 
