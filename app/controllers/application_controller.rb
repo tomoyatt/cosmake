@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user
+  before_action :search
   
   protected
   
@@ -21,5 +22,9 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def search
+    @search = Article.ransack(params[:q])
+    @articles = @search.result(distinct: true)
+  end
   
 end

@@ -1,6 +1,5 @@
 class Public::ArticlesController < ApplicationController
 
-  before_action :search
 
   def new
     @article = Article.new
@@ -20,7 +19,7 @@ class Public::ArticlesController < ApplicationController
 
   def index
   #  @articles = Article.published
-    @q = Article.ransack(params[:q])
+    @search = Article.ransack(params[:q])
     @articles = @search.result(distinct: true)
   end
 
