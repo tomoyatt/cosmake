@@ -18,9 +18,8 @@ class Public::ArticlesController < ApplicationController
   end
 
   def index
-  #  @articles = Article.published
     @search = Article.ransack(params[:q])
-    @articles = @search.result(distinct: true)
+    @articles = @search.result(distinct: true).published
   end
 
   def show

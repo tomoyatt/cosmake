@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   
   def search
     @search = Article.ransack(params[:q])
-    @articles = @search.result(distinct: true)
+    @articles = @search.result(distinct: true).published
   end
   
 end
