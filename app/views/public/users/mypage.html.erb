@@ -1,0 +1,35 @@
+<div class="container"><label><%= "#{@user.name}のマイページ" %></label>
+  <div class="row mb-2">
+    <div class="col-lg-8">
+      <table class="mb-3">
+        <tbody>
+          <tr>
+            <th>ユーザー情報</th>
+            <td><%= link_to "編集する", users_edit_path, class:"btn btn-success ml-5" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-bordered mb-5">
+        <tbody>
+            <td class="table-active">ユーザー名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td class="table-active">メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+      <label><%= link_to "いいね一覧", favorites_user_path(@user), class: 'text-dark' %></label>
+      <h3>投稿一覧</h3>
+      <div class="row">
+        <% @articles.each do |article| %>
+        <div class="col-lg-3">
+          <%= link_to (image_tag article.get_image, size: '150x150'), article_path(article) %><br>
+          <%= link_to article.title, article_path(article), class:"text-dark" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

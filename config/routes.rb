@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   scope module: :public do
     root to: "homes#top"
-    get 'users/my_page' => "users#show"
+    get 'users/my_page' => "users#mypage"
     get 'users/edit' => "users#edit"
     patch 'users' => "users#update"
     get 'users/unsubscribe'     => "users#unsubscribe"

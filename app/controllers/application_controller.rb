@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  
   def search
     @search = Article.ransack(params[:q])
     @articles = @search.result(distinct: true).published
