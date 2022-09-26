@@ -1,2 +1,18 @@
-<h1>Admin::Categories#edit</h1>
-<p>Find me in app/views/admin/categories/edit.html.erb</p>
+<div class="container">
+  <label class="h4 bg-light mb-5">カテゴリ編集画面</label>
+  <div class="row">
+    <div class="col-lg-10">
+      <% if flash[:category_edit_error] %>
+        <p class="text-danger" id="category_edit_error">
+          <%= flash[:category_edit_error] %>
+        </p>
+      <% end %> 
+      <div class="form mx-5">
+        <%= form_with model: @category, url: admin_category_path do |f| %>
+          <%= f.label :カテゴリ名, class:"mr-3" %>
+          <%= f.text_field :name %>
+          <%= f.submit "変更保存", class:"btn btn-success ml-3" %>
+        <% end %>
+      </div>
+    </div>
+  </div>

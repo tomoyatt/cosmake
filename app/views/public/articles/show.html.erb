@@ -7,23 +7,26 @@
 <br>
 <%= @article.title %>
 <%= @article.content %>
-<%= link_to "#{@article.user.name}", user_path(@article) %>
+<%= link_to "#{@article.user.name}", user_path(@article.user_id) %>
 
-<% if user_signed_in? || admin_signed_in? %>
+<% if user_signed_in? %>
   <% if @article.favorited_by?(current_user) %>
     <p>
       <%= link_to article_favorites_path(@article), method: :delete do %>
-        ♥<%= @article.favorites.count %> いいね
+        ♥<%= @article.favorites.count %>
       <% end %>
     </p>
     <% else %>
     <p>
       <%= link_to article_favorites_path(@article), method: :post do %>
-        ♡<%= @article.favorites.count %> いいね
+        ♡<%= @article.favorites.count %>
       <% end %>
     </p>
   <% end %>
+<% else %>
+  ♥<%= @article.favorites.count %>
 <% end %>
+
 
 <p>コメント件数: <%= @article.comments.count %></p>
 <% @article.comments.each do |comment| %>
