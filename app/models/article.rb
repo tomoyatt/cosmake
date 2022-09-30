@@ -3,6 +3,7 @@ class Article < ApplicationRecord
   has_many :comments,           dependent: :destroy
   has_many :favorites,          dependent: :destroy
   has_many :category_articles,  dependent: :destroy
+  has_many :categories, through: :category_articles
   belongs_to :user
   
   # 管理者用アソシエーション

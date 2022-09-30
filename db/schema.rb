@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_25_135059) do
+ActiveRecord::Schema.define(version: 2022_09_30_142400) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_09_25_135059) do
   end
 
   create_table "articles", force: :cascade do |t|
-    t.integer "category_id", null: false
+    t.integer "category_id"
     t.integer "user_id", null: false
     t.string "title", null: false
     t.boolean "is_active", default: true, null: false

@@ -49,7 +49,14 @@ class Public::ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :image, :content, :user_id, :category_id, :is_active)
+    values = params.require(:article).permit(
+      :title, :image, :content, :user_id, :is_active,
+      category_ids: []
+      )
+    if values[:category_ids].nil?
+      values[:category_ids] = []
+    end
+    return values
   end
 
 end

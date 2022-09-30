@@ -14,8 +14,14 @@
           <%= form_with model: @article, url: articles_path, method: :post do |f| %>
             <%= f.label :タイトル, class:"mr-3" %>
             <%= f.text_field :title, size: "50x5", placeholder: "タイトルを入力" %><br>
-            <%= f.label :カテゴリ, class:"mr-3" %>
-            <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "--選択してください--" %><br>
+            <%= f.label :category_ids, "カテゴリー" %>
+             <% Category.all.each do |category| %>
+               <%= f.check_box :category_ids,
+                   { multiple: true, checked: @article.categories.find_by(id: category.id).present?, 
+                   include_hidden: false }, category[:id] %>
+                <%= category.name %>
+              <% end %>
+            <br>
             <%= f.label :サムネイル %>
             <%= f.file_field :image %><br>
             <%= f.label :投稿内容 %><br>
@@ -23,7 +29,7 @@
             <%= f.label :公開ステータス %>
             <%= f.radio_button :is_active, true %> 公開
             <%= f.radio_button :is_active, false %> 非公開
-            <%= f.submit "新規投稿", class:"btn btn-success ml-3" %>
+            <%= f.submit "新規投稿", class: "btn btn-success ml-3" %>
           <% end %>
         </div>
       </div>
