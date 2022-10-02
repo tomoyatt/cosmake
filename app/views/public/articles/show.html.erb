@@ -1,8 +1,9 @@
-<% if @article.user == current_user %>
-  <%= link_to "編集する", edit_article_path, class: "btn btn-success ml-5" %>
-  <%= link_to "削除する", article_path(@article), method: :delete, class: "btn btn-danger" %>
+<% @article.categories.each do |category| %>
+  <%=link_to category.name, categories_path(category.id), class: "bg-primary text-white" %>
 <% end %>
+
 <br>
+
 <%= image_tag @article.get_image, size:'320x320' %>
 <br>
 <%= @article.title %>
@@ -41,6 +42,12 @@
 <% if user_signed_in? || admin_signed_in? %>
   <%= form_with model: [@article, @comment] do |f| %>
     <%= f.text_area :comment, size:'60x5', rows: '5', placeholder: "コメントをここに" %>
-    <%= f.submit "コメントを送信", class:"btn btn-primary" %>
+    <%= f.submit "コメントを送信", class: "btn btn-primary" %>
   <% end %>
+<% end %>
+
+
+<% if @article.user == current_user %>
+  <%= link_to "編集する", edit_article_path, class: "btn btn-success ml-5" %>
+  <%= link_to "削除する", article_path(@article), method: :delete, class: "btn btn-danger" %>
 <% end %>
