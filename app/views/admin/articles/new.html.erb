@@ -1,2 +1,38 @@
-<h1>Admin::Articles#new</h1>
-<p>Find me in app/views/admin/articles/new.html.erb</p>
+<div class="container">
+  <div class="error_message text-danger">
+    <% if flash[:notice] %>
+    <p id="article_create_error">
+      <%= flash[:notice] %>
+    </p>
+    <% end %>
+  </div>
+  <label class="h4 bg-light mb-5">新規投稿</label>
+  <div class="row">
+    <div class="col-lg-10">
+      <div class="form mx-5">
+        <div class="field">
+          <%= form_with model: @article, url: admin_articles_path, method: :post do |f| %>
+            <%= f.label :タイトル, class:"mr-3" %>
+            <%= f.text_field :title, size: "50x5", placeholder: "タイトルを入力" %><br>
+            <%= f.label :category_ids, "カテゴリー" %>
+             <% Category.all.each do |category| %>
+               <%= f.check_box :category_ids,
+                   { multiple: true, checked: @article.categories.find_by(id: category.id).present?, 
+                   include_hidden: false }, category[:id] %>
+                <%= category.name %>
+              <% end %>
+            <br>
+            <%= f.label :サムネイル %>
+            <%= f.file_field :image %><br>
+            <%= f.label :投稿内容 %><br>
+            <%= f.rich_text_area :content, placeholder: "本文を入力" %><br>
+            <%= f.label :公開ステータス %>
+            <%= f.radio_button :is_active, true %> 公開
+            <%= f.radio_button :is_active, false %> 非公開
+            <%= f.submit "新規投稿", class: "btn btn-success ml-3" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

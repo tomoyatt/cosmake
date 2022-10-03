@@ -30,8 +30,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
-    resources :articles, only: [:new, :index, :show, :edit]
-    resources :categories, only: [:new, :create, :index, :edit, :update]
+    get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
+    get 'category/:id' => "categories#index", as: :categories
+    resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    resources :categories, only: [:new, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
   end
 
