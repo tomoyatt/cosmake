@@ -1,2 +1,18 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container"><label><%= "#{@user.name}さん" %></label>
+  <div class="row mb-2">
+    <div class="col-lg-8">
+
+      <label><%= link_to "いいね一覧", favorites_user_path(@user), class: 'text-dark' %></label>
+      <h3>投稿一覧</h3>
+      <div class="row">
+        <% @articles.each do |article| %>
+        <div class="col-lg-3">
+          <%= link_to (image_tag article.get_image, size: '150x150'), admin_article_path(article) %><br>
+          <%= link_to article.title, admin_article_path(article), class:"text-dark" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= link_to "ユーザー情報編集する", edit_admin_user_path(@user), class:"btn btn-success" %>
+</div>

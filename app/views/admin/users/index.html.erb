@@ -1,2 +1,46 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<div class="container">
+  <div class="row mb-2">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-10">
+      <label class="h4 bg-light">ユーザー一覧</label>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <table class="table shadow-sm">
+        <thead class="bg-light">
+          <tr>
+            <th>会員ID</th>
+            <th>ユーザー名</th>
+            <th>メールアドレス</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= user.id %></td>
+            <td><%= link_to user.name, admin_user_path(user), class:"text-dark" %></td>
+            <td><%= user.email %></td>
+            <td>
+              <% if user.is_deleted == false %>
+                <p class="text-success">有効</p>
+              <% else %>
+                <p class="text-secondary">退会</p>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @users %>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-lg-5"></div>
+    <div class="col-lg-7">
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
