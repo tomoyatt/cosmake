@@ -7,6 +7,11 @@ class Public::UsersController < ApplicationController
     @articles = @user.articles.published
   end
 
+  def show_admin
+    @admin = Admin.find(1)
+    @articles = Article.where(user_id: 0)
+  end
+
   def mypage
     @user = current_user
     @articles = @user.articles

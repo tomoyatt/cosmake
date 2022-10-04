@@ -5,6 +5,12 @@ class Admin::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @articles = @user.articles.published
+  end
+  
+  def show_admin
+    @admin = Admin.find(1)
+    @articles = Article.where(user_id: 0)
   end
   
   def edit

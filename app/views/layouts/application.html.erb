@@ -13,7 +13,11 @@
   <body>
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <%= link_to "cosmake", root_path, class: 'text-dark mr-5' %>
+        <% if admin_signed_in? %>
+          <%= link_to "cosmake", admin_root_path, class: 'text-dark mr-5' %>
+        <% else %>
+          <%= link_to "cosmake", root_path, class: 'text-dark mr-5' %>
+        <% end %>
         <div class="container">
           <% if admin_signed_in? %>
             <%= search_form_for @search, url: admin_articles_path do |f| %>

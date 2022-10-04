@@ -8,7 +8,11 @@
 <br>
 <%= @article.title %>
 <%= @article.content %>
-<%= link_to "#{@article.user.name}", admin_user_path(@article.user_id) %>
+<% if @article.user_id == 0 %>
+  <%= link_to @admin.name, admin_users_0_path %>
+<% else %>
+  <%= link_to "#{@article.user.name}", admin_user_path(@article.user_id) %>
+<% end %>
 
 
   ♥<%= @article.favorites.count %>
@@ -23,10 +27,7 @@
   <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete %>
 <% end %>
 
-<%= form_with model: [@article, @comment] do |f| %>
-  <%= f.text_area :comment, size:'60x5', rows: '5', placeholder: "コメントをここに" %>
-  <%= f.submit "コメントを送信", class: "btn btn-primary" %>
-<% end %>
+<br>
 
 
   <%= link_to "編集する", edit_admin_article_path, class: "btn btn-success ml-5" %>

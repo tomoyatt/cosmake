@@ -8,7 +8,11 @@
 <br>
 <%= @article.title %>
 <%= @article.content %>
-<%= link_to "#{@article.user.name}", user_path(@article.user_id) %>
+<% if @article.user_id == 0 %>
+  <%= link_to @admin.name, users_0_path %>
+<% else %>
+  <%= link_to "#{@article.user.name}", user_path(@article.user_id) %>
+<% end %>
 
 <% if user_signed_in? %>
   <% if @article.favorited_by?(current_user) %>
@@ -39,7 +43,7 @@
   <% end %>
 <% end %>
 
-<% if user_signed_in? || admin_signed_in? %>
+<% if user_signed_in? %>
   <%= form_with model: [@article, @comment] do |f| %>
     <%= f.text_area :comment, size:'60x5', rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "コメントを送信", class: "btn btn-primary" %>
@@ -47,7 +51,7 @@
 <% end %>
 
 
-<% if @article.user == current_user %>
+<% if user_signed_in? && @article.user == current_user %>
   <%= link_to "編集する", edit_article_path, class: "btn btn-success ml-5" %>
   <%= link_to "削除する", article_path(@article), method: :delete, class: "btn btn-danger" %>
 <% end %>

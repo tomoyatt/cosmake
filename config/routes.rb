@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     patch 'users/withdraw'      => "users#withdraw"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     get 'category/:id' => "categories#index", as: :categories
+    get 'users/0' => "users#show_admin"
 
     resources :users, only: [:show, :edit]
     resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
@@ -32,7 +33,10 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     get 'category/:id' => "categories#index", as: :categories
-    resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+    get 'users/0' => "users#show_admin"
+    resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :comments, only: [:create]
+    end
     resources :categories, only: [:new, :create, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
   end

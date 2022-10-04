@@ -5,7 +5,8 @@ class Admin::ArticlesController < ApplicationController
   
   def create
     @article = Article.new(article_params)
-    if @article.save
+    @article.user_id = 0
+    if @article.save!
       redirect_to admin_article_path(@article.id)
     else
       @article = Article.new(article_params)
@@ -21,6 +22,7 @@ class Admin::ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
     @comment = Comment.new
+    @admin = Admin.find(1)
   end
 
   def edit
