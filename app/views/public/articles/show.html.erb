@@ -1,5 +1,5 @@
 <% @article.categories.each do |category| %>
-  <%=link_to category.name, categories_path(category.id), class: "bg-primary text-white" %>
+  <%= link_to category.name, categories_path(category.id), class: "bg-primary text-white" %>
 <% end %>
 
 <br>

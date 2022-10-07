@@ -29,6 +29,21 @@
               <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
               <%= f.submit "検索" %>
             <% end %>
+
+            <div class="dropdown ml-2">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                カテゴリー検索
+              </button>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <% Category.all.each do |category| %>
+                    <%= link_to category.name, categories_path(category.id), class: "dropdown-item" %>
+                  <% end %>
+                </div>
+
+            </div>
+
           <% end %>
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto my-2">
@@ -46,9 +61,6 @@
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
                 </li>
               <% elsif user_signed_in? %>
-                <li class="nav-item my-3 mr-5">
-                  <%= "ようこそ、#{current_user.name}さん！" %>
-                </li>
                 <li class="nav-item btn btn-outline-secondary mr-2 ml-5">
                   <%= link_to "新規投稿", new_article_path, class: 'nav-link text-dark' %>
                 </li>
