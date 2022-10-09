@@ -23,12 +23,12 @@
 <% @article.comments.each do |comment| %>
   <%= comment.user.name %>
   <%= comment.created_at.strftime('%Y/%m/%d') %><br>
-  <%= comment.comment %>
-  <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete %>
+  <%= comment.comment %><br>
+  <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete %><br>
 <% end %>
 
 <br>
 
 
   <%= link_to "編集する", edit_admin_article_path, class: "btn btn-success ml-5" %>
-  <%= link_to "削除する", admin_article_path(@article), method: :delete, class: "btn btn-danger" %>
+  <%= link_to "削除する", admin_article_path(@article), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>

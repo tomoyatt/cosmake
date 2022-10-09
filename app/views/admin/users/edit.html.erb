@@ -22,13 +22,6 @@
             <td><%= @user.email %></td>
           </tr>
           <tr>
-            <td>会員ステータス</td>
-            <td>
-              <%= f.radio_button :is_deleted, false %> 有効
-              <%= f.radio_button :is_deleted, true %> 退会
-            </td>
-          </tr>
-          <tr>
             <td></td>
             <td><%= f.submit "変更を保存", class:"btn btn-success" %></td>
           </tr>

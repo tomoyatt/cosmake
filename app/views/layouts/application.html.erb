@@ -24,26 +24,33 @@
               <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
               <%= f.submit "検索" %>
             <% end %>
+            <div class="dropdown ml-2">
+              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                カテゴリー検索
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% Category.all.each do |category| %>
+                  <%= link_to category.name, admin_categories_path(category.id), class: "dropdown-item" %>
+                <% end %>
+              </div>
+            </div>
           <% else %>
             <%= search_form_for @search, url: articles_path do |f| %>
               <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
               <%= f.submit "検索" %>
             <% end %>
-
             <div class="dropdown ml-2">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                 カテゴリー検索
               </button>
-
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <% Category.all.each do |category| %>
                     <%= link_to category.name, categories_path(category.id), class: "dropdown-item" %>
                   <% end %>
                 </div>
-
             </div>
-
           <% end %>
           <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto my-2">
@@ -94,7 +101,9 @@
     </header>
 
     <div class="shadow-sm mt-3 pb-3">
-      <%= flash[:alert] %>
+      <div class="text-danger">
+        <%= flash[:alert] %>
+      </div>
       <%= yield %>
     </div>
 

@@ -9,15 +9,12 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get 'users/my_page' => "users#mypage"
-    get 'users/edit' => "users#edit"
-    patch 'users' => "users#update"
     get 'users/unsubscribe'     => "users#unsubscribe"
-    patch 'users/withdraw'      => "users#withdraw"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     get 'category/:id' => "categories#index", as: :categories
     get 'users/0' => "users#show_admin"
 
-    resources :users, only: [:show, :edit]
+    resources :users, only: [:show, :edit, :update, :destroy]
     resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]

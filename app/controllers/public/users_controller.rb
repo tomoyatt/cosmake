@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
 
-  # before_action :authenticate_user
+ before_action :authenticate_user, {only: [:mypage,:unsubscribe, :edit, :update]}
+ before_action :ensure_current_user, {only: [:edit,:unsubscribe, :update, :destroy]}
+ before_action :ensure_guest_user, {only: [:edit, :unsubscribe, :update, :destroy]}
 
   def show
     @user = User.find(params[:id])
@@ -27,18 +29,31 @@ class Public::UsersController < ApplicationController
       redirect_to users_my_page_path
     else
       flash[:user_edit_error] = "項目は必ずご入力ください"
-      redirect_to customers_edit_path
+      redirect_to users_edit_path
     end
+  end
+
+  def destroy
+    @user = current_user
+    @user.destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to root_path
   end
 
   def unsubscribe
   end
 
-  def withdraw
-    @user = current_user
-    @user.update(is_deleted: true)
-    reset_session
-    redirect_to root_path
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      redirect_to root_path
+    end
+  end
+
+  def ensure_guest_user
+    if current_user.email == "guest@cosmake.com"
+      flash[:alert] = "ゲストユーザーの更新・削除はできません。"
+      redirect_to root_path
+    end
   end
 
   private
