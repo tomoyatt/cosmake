@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    get 'about' => "homes#about"
     get 'users/my_page' => "users#mypage"
     get 'users/unsubscribe'     => "users#unsubscribe"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user

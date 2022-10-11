@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,9 +14,9 @@
     <header class="shadow-sm">
       <nav class="navbar navbar-expand-lg navbar-light">
         <% if admin_signed_in? %>
-          <%= link_to "cosmake", admin_root_path, class: 'text-dark mr-5' %>
+          <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), admin_root_path %>
         <% else %>
-          <%= link_to "cosmake", root_path, class: 'text-dark mr-5' %>
+          <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), root_path %>
         <% end %>
         <div class="container">
           <% if admin_signed_in? %>
@@ -52,45 +52,49 @@
                 </div>
             </div>
           <% end %>
-          <div class="collapse navbar-collapse">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto my-2">
               <% if admin_signed_in? %>
-                <li class="nav-item btn btn-outline-secondary mr-2 ml-5">
+                <li class="nav-item mr-2">
                   <%= link_to "新規投稿", new_admin_article_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "投稿一覧", admin_articles_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
                 </li>
               <% elsif user_signed_in? %>
-                <li class="nav-item btn btn-outline-secondary mr-2 ml-5">
+                <li class="nav-item mr-2">
                   <%= link_to "新規投稿", new_article_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "マイページ", users_my_page_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
                 </li>
               <% else %>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to 'ゲストログイン', guests_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
                 </li>
-                <li class="nav-item btn btn-outline-secondary mr-2">
+                <li class="nav-item mr-2">
                   <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
                 </li>
               <% end %>
@@ -107,10 +111,20 @@
       <%= yield %>
     </div>
 
-    <footer>
+    <footer class="bg-dark text-white pt-5 pb-4">
       <div class="container">
-        <div class="small text-center text-dark" style="margin: 50px 0;">
-          Copyright © 2022  Cosmake.com
+        <div class="row">
+          <div class="col-md-4">
+            <p>あなたもメイク、始めませんか？</p>
+            <%= image_tag('rogo.jpg', size: '120x80', alt: "#") %>
+          </div>
+          <div class="col-md-8">
+            <h6 class="text-white mt-2 mb-3">Link</h6>
+            <ul class="p-0 list-unstyled">
+              <li><%= link_to "About", about_path, class: 'text-white-50' %></li>
+              <li class="text-white-50">お問い合わせ</li>
+            </ul>
+          </div>
         </div>
       </div>
     </footer>

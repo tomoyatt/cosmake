@@ -17,7 +17,7 @@
             <%= f.label :category_ids, "カテゴリー" %>
              <% Category.all.each do |category| %>
                <%= f.check_box :category_ids,
-                   { multiple: true, checked: @article.categories.find_by(id: category.id).present?, 
+                   { multiple: true, checked: @article.categories.find_by(id: category.id).present?,
                    include_hidden: false }, category[:id] %>
                 <%= category.name %>
               <% end %>
