@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
   def top
-    @articles = Article.published
+    @articles = Article.published.order(created_at: :desc)
   end
   
   def about

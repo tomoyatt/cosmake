@@ -1,3 +1,6 @@
+
+
+
 <% @article.categories.each do |category| %>
   <%=link_to category.name, admin_categories_path(category.id), class: "bg-primary text-white" %>
 <% end %>
@@ -29,6 +32,7 @@
 
 <br>
 
-
+<% if @article.user_id == 0 %>
   <%= link_to "編集する", edit_admin_article_path, class: "btn btn-success ml-5" %>
+<% end %>
   <%= link_to "削除する", admin_article_path(@article), method: :delete, class: "btn btn-danger", "data-confirm" => "本当に削除しますか？" %>

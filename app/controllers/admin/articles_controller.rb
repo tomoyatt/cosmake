@@ -2,21 +2,22 @@ class Admin::ArticlesController < ApplicationController
   def new
     @article = Article.new
   end
-  
+
   def create
     @article = Article.new(article_params)
     @article.user_id = 0
-    if @article.save!
+    if @article.save
       redirect_to admin_article_path(@article.id)
     else
       @article = Article.new(article_params)
-      flash[:notice] = "項目は必ず入力してください"
+      flash[:notice] = "タイトルと本文は必ず入力してください"
       render :new
     end
   end
 
   def index
-    @articles = Article.all
+    @search = Article.ransack(params[:q])
+    @articles = @search.result(distinct: true).published.order(created_at: :desc)
   end
 
   def show
@@ -28,13 +29,14 @@ class Admin::ArticlesController < ApplicationController
   def edit
     @article = Article.find(params[:id])
   end
-  
+
   def update
-    @article = Aeticle.find(params[:id])
+    @article = Article.find(params[:id])
+    @article.user_id = 0
     @article.update(article_params)
     redirect_to article_path(@article.id)
   end
-  
+
   def destroy
     @article = Article.find(params[:id])
     @article.destroy

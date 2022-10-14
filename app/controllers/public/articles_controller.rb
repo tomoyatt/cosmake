@@ -13,14 +13,14 @@ class Public::ArticlesController < ApplicationController
       redirect_to article_path(@article.id)
     else
       @article = Article.new(article_params)
-      flash[:notice] = "項目は必ず入力してください"
+      flash[:notice] = "タイトルと本文は必ず入力してください"
       render :new
     end
   end
 
   def index
     @search = Article.ransack(params[:q])
-    @articles = @search.result(distinct: true).published
+    @articles = @search.result(distinct: true).published.order(created_at: :desc)
   end
 
   def show

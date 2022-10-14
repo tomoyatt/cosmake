@@ -1,2 +1,47 @@
-<h1>Admin::Articles#edit</h1>
-<p>Find me in app/views/admin/articles/edit.html.erb</p>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-10 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">投稿編集フォーム</h5>
+      <div class="form-body p-4">
+        <div class="error_message text-danger">
+          <% if flash[:notice] %>
+          <p id="article_create_error">
+            <%= flash[:notice] %>
+          </p>
+          <% end %>
+        </div>
+          <%= form_with model: @article, url: admin_article_path, method: :patch do |f| %>
+            <div class="form-group mb-3 mt-4">
+              <label class="bg-light mb-3">タイトル</label>
+              <%= f.text_field :title, class: "form-control", placeholder: "タイトルを入力" %>
+            </div>
+            <div class="form-group mb-3 mt-4">
+              <%= f.label :category_ids, "カテゴリー", class: "bg-light" %><br>
+              <% Category.all.each do |category| %>
+                <%= f.check_box :category_ids,
+                 { multiple: true, checked: @article.categories.find_by(id: category.id).present?, 
+                 include_hidden: false }, category[:id] %>
+                <%= category.name %>
+              <% end %>
+            </div>
+            <div class="form-group mb-3 mt-4">
+              <label class="bg-light mb-3">サムネイル</label>
+              <p class="text-danger">※変更したい場合のみ、新たにファイルを選択してください。</p>
+              <%= f.file_field :image, class: "form-control-file" %>
+            </div>
+            <div class="form-group mb-3 mt-4">
+              <label class="bg-light mb-3">投稿本文</label>
+              <%= f.rich_text_area :content, placeholder: "本文を入力" %>
+            </div>
+            <div class="form-group mb-3 mt-4">
+              <label class="bg-light mr-3 mb-3">公開ステータス</label>
+              <%= f.radio_button :is_active, true %> 公開
+              <%= f.radio_button :is_active, false %> 非公開
+            </div>
+            <hr>
+            <%= f.submit "変更を保存", class: "btn btn-lg btn-block btn-success mt-4" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
