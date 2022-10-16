@@ -22,7 +22,8 @@ class Admin::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
-    @comment = Comment.new
+    @categories = @article.categories
+    @comments = @article.comments.order(created_at: :desc)
     @admin = Admin.find(1)
   end
 
@@ -34,7 +35,7 @@ class Admin::ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.user_id = 0
     @article.update(article_params)
-    redirect_to article_path(@article.id)
+    redirect_to admin_article_path(@article.id)
   end
 
   def destroy

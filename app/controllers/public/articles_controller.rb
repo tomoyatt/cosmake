@@ -25,7 +25,9 @@ class Public::ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @categories = @article.categories
     @comment = Comment.new
+    @comments = @article.comments.order(created_at: :desc)
     @admin = Admin.find(1)
   end
 
