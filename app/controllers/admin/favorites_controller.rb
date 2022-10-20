@@ -3,5 +3,6 @@ class Admin::FavoritesController < ApplicationController
     @user = User.find(params[:id])
     favorites = Favorite.where(user_id: @user.id).pluck(:article_id)
     @favorite_articles = Article.find(favorites)
+    @admin = Admin.find(1)
   end
 end

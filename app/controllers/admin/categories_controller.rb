@@ -18,6 +18,7 @@ class Admin::CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @category_id = @category.id
     @articles = Category.find(@category_id).articles.order(created_at: :desc).page(params[:page]).per(20)
+     @admin = Admin.find(1)
   end
 
   def edit
