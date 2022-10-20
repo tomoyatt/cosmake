@@ -17,7 +17,8 @@ class Admin::ArticlesController < ApplicationController
 
   def index
     @search = Article.ransack(params[:q])
-    @articles = @search.result(distinct: true).published.order(created_at: :desc)
+    @articles = @search.result(distinct: true).published.order(created_at: :desc).page(params[:page]).per(20)
+    @admin = Admin.find(1)
   end
 
   def show
