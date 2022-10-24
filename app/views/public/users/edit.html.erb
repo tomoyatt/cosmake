@@ -1,36 +1,36 @@
 <div class="container">
-  <label class="h4 bg-light">ユーザー情報編集</label>
-  <div class="error_message">
-    <% if flash[:user_edit_error] %>
-      <p id="customer_edit_error">
-        <%= flash[:user_edit_error] %>
-      </p>
-    <% end %>
-  </div>
-  <div class="row mb-2">
-    <div class="col-lg-10">
-      <%= form_with model: @user, url: user_path, method: :patch do |f| %>
-      <table class="table table-borderless">
-        <tbody>
-          <tr>
-            <td>ユーザー名</td>
-            <td>
-              <%= f.text_field :name, autofocus: true %>
-            </td>
-          <tr>
-            <td>メールアドレス</td>
-            <td><%= f.email_field :email, autocomplete: "email" %></td>
-          </tr>
-          <tr>
-            <td></td>
-            <td>
-              <%= f.submit "編集内容を保存", class:"btn btn-success mr-5" %>
-              <%= link_to "退会する", users_unsubscribe_path, class:"btn btn-danger ml-5" %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <% end %>
+  <div class="row no-gutters">
+    <div class="col-md-10 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h5 class="text-dark bg-light p-4 mb-0">ユーザー情報編集</h5>
+        <div class="error_message">
+          <% if flash[:user_edit_error] %>
+            <p id="customer_edit_error">
+              <%= flash[:user_edit_error] %>
+            </p>
+          <% end %>
+        </div>
+        <%= form_with model: @user, url: user_path, method: :patch do |f| %>
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>ユーザー名</td>
+              <td>
+                <%= f.text_field :name, autofocus: true %>
+              </td>
+            <tr>
+              <td>メールアドレス</td>
+              <td><%= f.email_field :email, autocomplete: "email" %></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <%= f.submit "編集内容を保存", class:"btn btn-success mr-5" %>
+                <%= link_to "退会する", users_unsubscribe_path, class:"btn btn-danger ml-5" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <% end %>
     </div>
   </div>
 </div>

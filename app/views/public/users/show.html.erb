@@ -1,17 +1,35 @@
-<div class="container"><label><%= "#{@user.name}さん" %></label>
-  <div class="row mb-2">
-    <div class="col-lg-8">
-      
-      <label><%= link_to "いいね一覧", favorites_user_path(@user), class: 'text-dark' %></label>
-      <h3>投稿一覧</h3>
-      <div class="row">
-        <% @articles.each do |article| %>
-        <div class="col-lg-3">
-          <%= link_to (image_tag article.get_image, size: '150x150'), article_path(article) %><br>
-          <%= link_to article.title, article_path(article), class:"text-dark" %>
-        </div>
-        <% end %>
-      </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-sm-8 p-3 h4">
+      <i class="fas fa-user"></i><%= "#{@user.name}" %>
+    </div>
+    <div class="col-md-4 col-sm-4 p-3 h5">
+      <span class="float-right"><%= link_to "いいね一覧", favorites_user_path(@user), class: 'text-dark' %></span>
     </div>
   </div>
+  <% if @user == current_user %>
+    <%= link_to "編集する", edit_user_path(@user.id), class:"btn btn-success" %>
+  <% end %>
+  <div class="h3 p-3">投稿一覧</div>
+  <div class="row">
+    <% @articles.each do |article| %>
+    <div class="col-md-6 col-sm-6 border">
+      <div class="row">
+        <div class="col-md-4 col-sm-4 p-3">
+          <%= link_to (image_tag article.get_image, size: '150x150'), article_path(article) %>
+        </div>
+        <div class="col-md-8 col-sm-8 p-3">
+          <div class="p-3">
+            <%= link_to article.title, article_path(article), class: "text-dark h5" %>
+          </div>
+          <div class="p-3">
+            <i class="fas fa-user"></i>
+            <%= "#{article.user.name}" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <%= paginate @articles %>
 </div>

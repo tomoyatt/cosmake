@@ -6,17 +6,17 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @articles = @user.articles.published
+    @articles = @user.articles.published.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show_admin
     @admin = Admin.find(1)
-    @articles = Article.where(user_id: 0)
+    @articles = Article.where(user_id: 0).order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def mypage
     @user = current_user
-    @articles = @user.articles
+    @articles = @user.articles.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def edit
