@@ -23,16 +23,17 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
-
+  
   namespace :admin do
     root to: "homes#top"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     get 'category/:id' => "categories#index", as: :categories
+    post 'categories/new' => "categories#create"
     get 'users/0' => "users#show_admin"
     resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:create]
     end
-    resources :categories, only: [:new, :create, :edit, :update]
+    resources :categories, only: [:new, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
   end
 
