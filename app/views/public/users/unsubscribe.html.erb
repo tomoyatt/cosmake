@@ -5,7 +5,7 @@
     退会する場合は、「退会する」をクリックしてください。
   </p>
   <div class="mt-5">
-    <%= link_to "退会しない", users_my_page_path, class:"btn btn-primary mr-3" %>
+    <%= link_to "退会しない", mypage_path, class:"btn btn-primary mr-3" %>
     <%= link_to "退会する", user_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger" %>  
   </div>
 </div>

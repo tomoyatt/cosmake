@@ -11,7 +11,7 @@
   </head>
 
   <body>
-    <header class="shadow-sm mb-3">
+    <header class="shadow-sm mb-3 z-index">
       <nav class="navbar navbar-expand-lg navbar-light">
         <% if admin_signed_in? %>
           <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), admin_root_path %>
@@ -82,7 +82,7 @@
                   <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
                 </li>
                 <li class="nav-item mr-2">
-                  <%= link_to "マイページ", user_path(current_user.id), class: 'nav-link text-dark' %>
+                  <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
                 </li>
                 <li class="nav-item mr-2">
                   <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>

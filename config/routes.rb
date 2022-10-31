@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'users/unsubscribe'     => "users#unsubscribe"
     get 'articles/:id/favorites' => "favorites#index", as: :favorites_user
     get 'category/:id' => "categories#index", as: :categories
+    get 'user/mypage' => "users#mypage", as: :mypage
     get 'users/0' => "users#show_admin"
     resources :users, only: [:show, :edit, :update, :destroy]
     resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
       resources :comments, only: [:create]
     end
     resources :categories, only: [:new, :edit, :update]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
   end
 
   #ゲストユーザー用

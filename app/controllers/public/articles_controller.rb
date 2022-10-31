@@ -39,14 +39,18 @@ class Public::ArticlesController < ApplicationController
   def update
     @article = Article.find(params[:id])
     @article.user_id = current_user.id
-    @article.update(article_params)
-    redirect_to article_path(@article.id)
+    if @article.update(article_params)
+      redirect_to article_path(@article.id)
+    else
+      flash[:notice] = "タイトルと本文は必ず入力してください"
+      redirect_to edit_article_path
+    end
   end
 
   def destroy
     @article = Article.find(params[:id])
     @article.destroy
-    redirect_to users_my_page_path
+    redirect_to mypage_path
   end
 
 

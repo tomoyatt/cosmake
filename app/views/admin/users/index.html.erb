@@ -3,6 +3,7 @@
     <div class="col-lg-2"></div>
     <div class="col-lg-10">
       <label class="h4 bg-light">ユーザー一覧</label>
+      <p>管理者：<%= link_to @admin.name, admin_users_0_path, class: "text-dark ml-2" %></p>
     </div>
   </div>
   <div class="row mb-2">
@@ -24,11 +25,7 @@
             <td><%= link_to user.name, admin_user_path(user), class:"text-dark" %></td>
             <td><%= user.email %></td>
             <td>
-              <% if user.is_deleted == false %>
-                <p class="text-success">有効</p>
-              <% else %>
-                <p class="text-secondary">退会</p>
-              <% end %>
+              <%= link_to "削除する", admin_user_path(user.id), method: :delete, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger" %> 
             </td>
           </tr>
           <% end %>

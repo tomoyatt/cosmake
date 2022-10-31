@@ -52,9 +52,7 @@
           <%= comment.comment %>
           　-<%= comment.user.name %>
           <%= comment.created_at.strftime('%Y/%m/%d') %>
-          <% if comment.user == current_user %>
             <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete %><br>
-          <% end %>
         </div>
         <% end %>
       </div>

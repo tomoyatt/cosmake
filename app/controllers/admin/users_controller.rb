@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   def index
     @users = User.page(params[:page]).per(50)
+    @admin = Admin.find(1)
   end
 
   def show
@@ -24,6 +25,14 @@ class Admin::UsersController < ApplicationController
     else
       redirect_to edit_admin_user_paht(@user)
     end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    flash[:notice] = "ユーザーを削除しました"
+    redirect_to admin_users_path
+
   end
 
   private

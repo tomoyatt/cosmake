@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
 
  before_action :authenticate_user, {only: [:mypage,:unsubscribe, :edit, :update]}
- before_action :ensure_current_user, {only: [:edit,:unsubscribe, :update, :destroy]}
+ before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
  before_action :ensure_guest_user, {only: [:edit, :unsubscribe, :update, :destroy]}
 
   def show
@@ -11,7 +11,7 @@ class Public::UsersController < ApplicationController
 
   def show_admin
     @admin = Admin.find(1)
-    @articles = Article.where(user_id: 0).order(created_at: :desc).page(params[:page]).per(10)
+    @articles = Article.where(user_id: 0).published.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def mypage
@@ -26,7 +26,7 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to users_my_page_path
+      redirect_to mypage_path
     else
       flash[:user_edit_error] = "項目は必ずご入力ください"
       redirect_to users_edit_path
