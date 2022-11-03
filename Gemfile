@@ -56,9 +56,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# action_text画像用
-gem 'rmagick', '>= 4.1.0.rc2'
-
 
 gem 'net-smtp'
 gem 'kaminari','~> 1.2.1'
