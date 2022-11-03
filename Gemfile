@@ -57,7 +57,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # action_text画像用
-gem 'rmagick'
+gem 'rmagick', '>= 4.1.0.rc2'
 
 
 gem 'net-smtp'
