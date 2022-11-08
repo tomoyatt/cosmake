@@ -17,7 +17,7 @@
             </div>
             <div class="form-group mb-3 mt-4">
               <%= f.label :category_ids, "カテゴリー", class: "bg-light" %><br>
-              <% Category.all.each do |category| %>
+              <% @category.each do |category| %>
                 <%= f.check_box :category_ids,
                  { multiple: true, checked: @article.categories.find_by(id: category.id).present?, 
                  include_hidden: false }, category[:id] %>

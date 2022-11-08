@@ -4,6 +4,7 @@ class Public::ArticlesController < ApplicationController
 
   def new
     @article = Article.new
+    @category = Category.where.not('name like ?', '%運営部%')
   end
 
   def create
@@ -34,6 +35,7 @@ class Public::ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
+    @category = Category.where.not('name like ?', '%運営部%')
   end
 
   def update
