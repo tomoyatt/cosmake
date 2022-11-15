@@ -43,12 +43,6 @@ class Public::UsersController < ApplicationController
   def unsubscribe
   end
 
-  def ensure_current_user
-    if current_user.id != params[:id].to_i
-      redirect_to root_path
-    end
-  end
-
   def ensure_guest_user
     if current_user.email == "guest@cosmake.com"
       flash[:alert] = "ゲストユーザーの更新・削除はできません。"

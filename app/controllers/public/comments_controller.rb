@@ -1,4 +1,6 @@
 class Public::CommentsController < ApplicationController
+  
+  before_action :ensure_current_user, only: [:destroy]
 
   def create
     article = Article.find(params[:article_id])

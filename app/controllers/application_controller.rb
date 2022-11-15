@@ -21,6 +21,13 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_session_path
     end
   end
+  
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      redirect_to root_path
+    end
+  end
+
 
   def search
     @search = Article.ransack(params[:q])

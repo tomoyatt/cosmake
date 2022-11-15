@@ -35,6 +35,12 @@ class Admin::CategoriesController < ApplicationController
       redirect_to edit_admin_category_path(@category)
     end
   end
+  
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to new_admin_category_path
+  end
 
   private
 

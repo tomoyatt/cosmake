@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resources :articles, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:create]
     end
-    resources :categories, only: [:new, :edit, :update]
+    resources :categories, only: [:new, :edit, :update, :destroy]
     resources :users, only: [:index, :show, :edit, :update, :destroy]
   end
 

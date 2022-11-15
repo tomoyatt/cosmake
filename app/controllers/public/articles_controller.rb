@@ -1,6 +1,7 @@
 class Public::ArticlesController < ApplicationController
 
   before_action :authenticate_user, only: [:new]
+  before_action :ensure_current_user, only: [:edit, :update, :destroy]
 
   def new
     @article = Article.new
@@ -31,6 +32,9 @@ class Public::ArticlesController < ApplicationController
     @comment = Comment.new
     @comments = @article.comments.order(created_at: :desc)
     @admin = Admin.find(1)
+    if @article.is_active == false && @article.user != current_user || @article.user_id == 0
+      redirect_to root_path
+    end
   end
 
   def edit
