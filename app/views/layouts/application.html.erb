@@ -13,19 +13,26 @@
 
   <body>
     <header class="bg-white shadow-sm mb-3 sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <% if admin_signed_in? %>
-          <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), admin_root_path %>
-        <% else %>
-          <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), root_path %>
-        <% end %>
-        <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="m-2">
           <% if admin_signed_in? %>
-            <%= search_form_for @search, url: admin_articles_path do |f| %>
-              <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
-              <%= f.submit "検索" %>
-            <% end %>
-            <div class="dropdown ml-2">
+            <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), admin_root_path %>
+          <% else %>
+            <%= link_to image_tag('rogo.jpg', size: '120x80', alt: "#"), root_path %>
+          <% end %>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <% if admin_signed_in? %>
+            <div class="ml-auto">
+              <%= search_form_for @search, url: admin_articles_path do |f| %>
+                <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
+                <%= f.submit "検索", class: "btn btn-sm btn-success" %>
+              <% end %>
+            </div>
+            <div class="dropdown ml-auto">
               <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                 カテゴリー検索
@@ -36,74 +43,70 @@
                 <% end %>
               </div>
             </div>
-          <% else %>
-            <%= search_form_for @search, url: articles_path do |f| %>
-              <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
-              <%= f.submit "検索" %>
-            <% end %>
-            <div class="dropdown ml-2">
-              <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                  aria-haspopup="true" aria-expanded="false">
-                カテゴリー検索
-              </button>
+            <% else %>
+              <div class="ml-auto">
+                <%= search_form_for @search, url: articles_path do |f| %>
+                  <%= f.search_field :title_cont, placeholder: "キーワードを入力" %>
+                  <%= f.submit "検索", class: "btn btn-sm btn-success" %>
+                <% end %>
+              </div>
+              <div class="dropdown ml-auto">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                  カテゴリー検索
+                </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <% Category.all.each do |category| %>
                     <%= link_to category.name, categories_path(category.id), class: 'dropdown-item' %>
                   <% end %>
                 </div>
-            </div>
-          <% end %>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav nav-tabs ml-auto my-2">
-              <% if admin_signed_in? %>
-                <li class="nav-item mr-2">
-                  <%= link_to "新規投稿", new_admin_article_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "投稿一覧", admin_articles_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "カテゴリー", new_admin_category_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
-                </li>
-              <% elsif user_signed_in? %>
-                <li class="nav-item mr-2">
-                  <%= link_to "新規投稿", new_article_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-                </li>
-              <% else %>
-                <li class="nav-item mr-2">
-                  <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to 'ゲストログイン', guests_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-                </li>
-                <li class="nav-item mr-2">
-                  <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+              </div>
+            <% end %>
+          <ul class="navbar-nav nav-tabs ml-auto my-auto text-nowrap">
+            <% if admin_signed_in? %>
+              <li class="nav-item active mr-2">
+                <%= link_to "新規投稿", new_admin_article_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "投稿一覧", admin_articles_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "ユーザー一覧", admin_users_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "カテゴリー", new_admin_category_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
+            <% elsif user_signed_in? %>
+              <li class="nav-item mr-2">
+                <%= link_to "新規投稿", new_article_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "マイページ", mypage_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
+            <% else %>
+              <li class="nav-item mr-2">
+                <%= link_to "投稿一覧", articles_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to 'ゲストログイン', guests_guest_sign_in_path, method: :post, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item mr-2">
+                <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </nav>
     </header>
